@@ -1,1 +1,4 @@
-This is a thing. I don't even know what.
+# Devious
+
+An irc bot in scheme. And an awful pun.
+

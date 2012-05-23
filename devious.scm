@@ -18,7 +18,13 @@
 ; (define (_debug) void)
 
 (define all-handlers '())
+(define all-initializers '())
+; TODO dedupe
+; Some cool metaprogramming to be done here for sure
 (define (register-handler handler) (set! all-handlers (append all-handlers (list handler))))
+(define (register-initializer initializer) (set! all-initializers (append all-initializers (list initializer))))
+
+(register-initializer (lambda () (join-channels devious-channels)))
 
 (register-handler (lambda (line) (_debug line)))
 (require "lib/handlers")
@@ -32,6 +38,8 @@
 (define devious-server  "irc.psych0tik.net")
 (define devious-port    6697)
 (define devious-ssl     #t)
+
+(define devious-channels (list "#hackery"))
 
 (define devious-nick    "devious")
 (define devious-name    "devious")

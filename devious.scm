@@ -37,7 +37,7 @@
 
 (define devious-server  "irc.psych0tik.net")
 (define devious-port    6697)
-(define devious-ssl     #t)
+(define devious-ssl?    #t)
 
 (define devious-channels (list "#hackery"))
 
@@ -65,7 +65,7 @@
         (_debug("eof reached"))
         (handle-line line)
     )
-    (_loop i o)
+    (_loop i o )
   )
 )
 
@@ -77,10 +77,9 @@
   )
 
 (define (main)
-  ; TODO Deal with (if (devious-ssl)
   (receive
      (i o)
-     (if (equal? devious-ssl #t)
+     (if (devious-ssl?)
          (ssl-connect devious-server devious-port)
          (tcp-connect devious-server devious-port)
      )

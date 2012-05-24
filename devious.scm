@@ -50,8 +50,8 @@
 (load-config)
 
 (define (map-over handlers line)
-  (let* ([func (lambda (f) (f line))])
-        (map func handlers)))
+  (map (lambda (f) (f line))
+       handlers))
 
 (define (handle-line line)
   ; Catch PING's early and handle

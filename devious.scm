@@ -21,12 +21,14 @@
 (define all-initializers '())
 ; TODO dedupe
 ; Some cool metaprogramming to be done here for sure
-(define (register-handler handler) (set! all-handlers (append all-handlers (list handler))))
-(define (register-initializer initializer) (set! all-initializers (append all-initializers (list initializer))))
+(define (register-handler handler)
+  (set! all-handlers (append all-handlers (list handler))))
+(define (register-initializer initializer)
+  (set! all-initializers (append all-initializers (list initializer))))
 
 (register-initializer (lambda () (join-channels devious-channels)))
-
 (register-handler (lambda (line) (_debug line)))
+
 (require "lib/handlers")
 
 ; TODO
@@ -47,49 +49,35 @@
 
 (define (map-over handlers line)
   (let* ([func (lambda (f) (f line))])
-        (map func handlers)
-        )
-  )
+        (map func handlers)))
 
 (define (handle-line line)
   ; Catch PING's early and handle
   (if (ping? line)
       (output (pong line))
-      (map-over all-handlers line)
-  )
-  )
+      (map-over all-handlers line)))
 
 (define (_loop i o)
   (let* ([line (read-line i)])
     (if (eof-object? line)
         (_debug("eof reached"))
-        (handle-line line)
-    )
-    (_loop i o )
-  )
-)
+        (handle-line line))
+    (_loop i o )))
 
 ; Setup and initialization
 (define (enter i o) (
   ; Any module registration etc should happen here.
   (devious-init o)
-  (_loop i o))
-  )
+  (_loop i o)))
 
 (define (main)
   (receive
      (i o)
-     (if (devious-ssl?)
+     (if devious-ssl?
          (ssl-connect devious-server devious-port)
          (tcp-connect devious-server devious-port)
-     )
-     (
-      (define (output line) (write-line line o))
-      (enter i o)
-     )
-  )
-)
-
+     )(define (output line) (write-line line o))
+      (enter i o)))
 
 (main)
 

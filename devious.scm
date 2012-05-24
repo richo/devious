@@ -41,7 +41,7 @@
 (define devious-port    6697)
 (define devious-ssl?    #t)
 
-(define devious-channels (list "#hackery"))
+(define devious-channels (list "#devious"))
 
 (define devious-nick    "devious")
 (define devious-name    "devious")

@@ -76,8 +76,9 @@
      (if devious-ssl?
          (ssl-connect devious-server devious-port)
          (tcp-connect devious-server devious-port)
-     )(define (output line) (write-line line o))
-      (enter i o)))
+     )
+     ((define (output line) (write-line line o))
+      (enter i o))))
 
 (main)
 

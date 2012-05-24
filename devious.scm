@@ -45,6 +45,8 @@
 
 (define devious-nick    "devious")
 (define devious-name    "devious")
+
+(define devious-admin-nick "warl0ck")
 (load-config)
 
 (define (map-over handlers line)

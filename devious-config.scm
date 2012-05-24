@@ -13,4 +13,6 @@
 ;(define devious-nick    "devious")
 ;(define devious-name    "devious")
 ;
+;(define devious-admin-nick "warl0ck")
+;
 ;(define devious-channels (list "#hackery"))

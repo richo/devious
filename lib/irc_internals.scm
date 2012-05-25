@@ -16,5 +16,5 @@
       (string-append "nick " devious-nick))))
 
 (define (devious-become-ready)
-  (let* ([func (lambda (f) (f))])
+  (let ((func (lambda (f) (f))))
         (map func all-initializers)))

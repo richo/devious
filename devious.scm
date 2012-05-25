@@ -60,7 +60,7 @@
       (map-over all-handlers line)))
 
 (define (_loop i o)
-  (let* ([line (read-line i)])
+  (let ((line (read-line i)))
     (if (eof-object? line)
         (_debug("eof reached"))
         (handle-line line))

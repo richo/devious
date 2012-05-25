@@ -6,7 +6,7 @@
 
 (register-handler (lambda (line)
   (if (msg-from-admin? line)
-      (let* [(data (line-get-data line))]
+      (let ((data (line-get-data line)))
             (if (string-prefix? "eval" data)
                 (with-input-from-string
                   (string-intersperse (cdr (string-split data)) " ")

@@ -1,4 +1,4 @@
-#!/usr/bin/env csi -s
+#!/usr/bin/env csi -ss
 ; Shitty irc bot, for the lulz
 ;
 
@@ -72,7 +72,7 @@
   (devious-init o)
   (_loop i o)))
 
-(define (main)
+(define (main argv)
   (receive
      (i o)
      (if devious-ssl?
@@ -81,5 +81,3 @@
      )
      ((define (output line) (write-line line o))
       (enter i o))))
-
-(main)

@@ -36,15 +36,30 @@
 ; (if (equal? (length all-handlers) 0)
 ;     ( bail!)
 ; )
+(define env-or-default
+  (lambda (env-var default)
+    (let ((store (get-environment-variable env-var)))
+          (if store
+            store
+            default
+            ))))
 
-(define devious-server  "irc.psych0tik.net")
-(define devious-port    6697)
-(define devious-ssl?    #t)
+
+(let ((ssl (get-environment-variable "DEVIOUS_SSL")))
+      (if ssl
+        (if (= ssl "false")
+          (define devious-ssl? #f)
+          (define devious-ssl? #t)
+          )
+        (define devious-ssl? #f)
+        ))
+
+(define devious-server (env-or-default "DEVIOUS_SERVER" "irc.psych0tik.net"))
+(define devious-port (string->number (env-or-default "DEVIOUS_PORT" "6697")))
+(define devious-nick (env-or-default "DEVIOUS_NICK" "devious"))
+(define devious-name (env-or-default "DEVIOUS_NAME" "devious"))
 
 (define devious-channels (list "#devious"))
-
-(define devious-nick    "devious")
-(define devious-name    "devious")
 
 (define devious-admin-nick "warl0ck")
 (load-config)
